@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <Nav/>
     <div class="hero is-primary">
       <div class="hero-body">
         <div class="container">
@@ -13,6 +14,15 @@
     </div>
   </div>
 </template>
+<script>
+import Nav from '@/components/Nav.vue'
+export default {
+    name: 'Home',
+  components: {
+    Nav
+  }
+}
+</script>
 <style lang="scss" scoped>
   .org-description {
     margin-top: 50px;

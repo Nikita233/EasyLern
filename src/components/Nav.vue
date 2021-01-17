@@ -43,6 +43,6 @@ export default {
       &.router-link-exact-active {
         color: #d88d00;
       }
-    }  
-  } 
+    }
+  }
 </style>

@@ -20,8 +20,10 @@
     <div class="navbar-end">
       <div class="navbar-item">
           <div class="avatar">
-            <img src="https://lh3.googleusercontent.com/proxy/YU9jGeuhkAhA034FftTCT2FtqX50Z4jj2FMUT66K0U9i8WKCr4fdZEqeqvEBUWEk46Pf77xgikJuIlhYpCD5s09P7iBuPqaZ5Pukq5ZmHbNBHMPeHbjdzf8CogL9tHanNY_Xk-x94A" alt="Avatar">
-          </div>
+              <router-link to="/Cabinet">
+              <img src="https://lh3.googleusercontent.com/proxy/YU9jGeuhkAhA034FftTCT2FtqX50Z4jj2FMUT66K0U9i8WKCr4fdZEqeqvEBUWEk46Pf77xgikJuIlhYpCD5s09P7iBuPqaZ5Pukq5ZmHbNBHMPeHbjdzf8CogL9tHanNY_Xk-x94A" alt="Avatar">
+                </router-link>
+            </div>
       </div>
     </div>
   </div>

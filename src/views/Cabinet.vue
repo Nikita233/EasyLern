@@ -4,17 +4,7 @@
     <div class="hero">
       <div class="hero-body">
         <div class="container">
-          <aside class="menu-right">
-            <p class="menu-label">
-              General
-            </p>
-            <ul class="menu-list">
-              <li><a>База вопросов</a></li>
-              <li><a>База тестов</a></li>
-              <li><a>Статистика</a></li>
-              <li><a>Настройки</a></li>
-            </ul>
-          </aside>
+         <Menu />
           <article>
             <div class="card">
               <div class="card-image">
@@ -54,12 +44,17 @@
 
 <script>
 import Nav_Main from '@/components/Nav_Main.vue'
+import  Menu  from "@/components/Menu.vue";
 export default {
-    name: 'Home',
+  name: 'Home',
   components: {
-    Nav_Main
+    Nav_Main,
+    Menu
   }
 }
+
+
+
 </script>
 
 <style lang="scss" scoped>

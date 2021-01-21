@@ -5,10 +5,10 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Welcome to EasyLearn
+          Welcome to EasyTesting
         </h1>
         <h2 class="subtitle">
-          Make your study easyer
+          Make your Tests easyer
         </h2>
         <div class="button-block">
           <button class="button is-xl is-dark">Sign Up</button>

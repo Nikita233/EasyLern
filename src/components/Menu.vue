@@ -4,7 +4,7 @@
               General
             </p>
             <ul class="menu-list">
-              <router-link to=""><li><a>База вопросов</a></li></router-link>
+              <router-link to="/Quebase"><li><a>База вопросов</a></li></router-link>
               <router-link to=""><li><a>База тестов</a></li></router-link>
               <router-link to=""><li><a>Статистика</a></li></router-link>
               <router-link to="/Settings"><li><a>Настройки</a></li></router-link>

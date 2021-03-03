@@ -5,16 +5,21 @@
       <div class="hero-body">
         <div class="container">
          <Menu />
+         <b>
+            <div class="buttons">
+              <button class="button is-link">Создать тест</button>
+            </div>
+          </b>
          <article class="panel is-link">
             <p class="panel-heading">
               Быстрый поиск
             </p>
             <p class="panel-tabs">
               <a class="is-active">All</a>
-              <a>Public</a>
-              <a>Private</a>
-              <a>Sources</a>
-              <a>Forks</a>
+              <a></a>
+              <a></a>
+              <a></a>
+              <a></a>
             </p>
             <div class="panel-block">
               <p class="control has-icons-left">
@@ -25,6 +30,7 @@
               </p>
             </div>
           </article>
+          
          
         </div>
         
@@ -55,6 +61,10 @@ article{
   margin-left: auto;
   margin-right: auto;
   
+}
+b{
+  
+  float: right;
 }
   .org-description {
     margin-top: 50px;

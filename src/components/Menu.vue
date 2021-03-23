@@ -1,5 +1,5 @@
 <template>
-  <aside class="menu-right">
+  <nav class="menu-right">
             <p class="menu-label">
               General
             </p>
@@ -10,7 +10,7 @@
               <router-link to="/Settings"><li><a>Настройки</a></li></router-link>
               
             </ul>
-          </aside>
+          </nav>
 </template>
 
 <script>

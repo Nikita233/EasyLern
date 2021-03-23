@@ -5,12 +5,7 @@
       <div class="hero-body">
         <div class="container">
          <Menu />
-         <b>
-            <div class="buttons">
-              <button class="button is-link">Создать тест</button>
-            </div>
-          </b>
-         <article class="panel is-link">
+            <article class="panel is-link">
             <p class="panel-heading">
               Быстрый поиск
             </p>
@@ -29,8 +24,12 @@
                 </span>
               </p>
             </div>
+
           </article>
-          
+            <div id="buttons">
+                <button v-on:click="windowNew">Создать тест</button>
+                <modal v-show="isModalVisible" @close="windowClose" />
+            </div>
          
         </div>
         
@@ -42,19 +41,44 @@
   </div>
 </template>
 
+
 <script>
 import Menu from '@/components/Menu.vue'
 import Nav_Main from '@/components/Nav_Main.vue'
+import Modal from '@/components/Modal.vue'
+
 export default {
     name: 'Home',
   components: {
-    Nav_Main,
-    Menu
-  }
-}
+      Modal,
+      Nav_Main,
+      Menu
+  },
+    data () {
+        return {
+            isModalVisible: false,
+        };
+    },
+    methods: {
+
+        windowNew() {
+            this.isModalVisible = true;
+        },
+        windowClose() {
+            this.isModalVisible = false;
+        }
+        }
+
+    };
+
 </script>
 
+
+
 <style lang="scss" scoped>
+    panel-block {
+       // z-index: -1;
+    }
 article{
   height: 300px;
   width: 700px;
@@ -62,12 +86,12 @@ article{
   margin-right: auto;
   
 }
-b{
-  
-  float: right;
-}
+
   .org-description {
     margin-top: 50px;
   }
-
+    .container {
+        display: flex;
+    }
 </style>
+

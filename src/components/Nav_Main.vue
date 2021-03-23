@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar container" role="navigation" aria-label="main navigation">
+<header class="navbar " role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
       <strong class="is-size-4">Et</strong>
@@ -10,14 +10,9 @@
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div id="navbar" class="navbar-menu">
-      <div class="navbar-start"></div>
-    <div class="navbar-center">
         <div class="navbar-item">
             <h2>Имя Фамилия Отчество</h2>
         </div>
-    </div>
-    <div class="navbar-end">
       <div class="navbar-item">
           <div class="avatar">
               <router-link to="/Cabinet">
@@ -25,9 +20,7 @@
                 </router-link>
             </div>
       </div>
-    </div>
-  </div>
-</nav>
+</header>
 </template>
 <script>
 export default {
@@ -46,4 +39,8 @@ export default {
       }
     }
   }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+    }
 </style>

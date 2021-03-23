@@ -6,6 +6,7 @@ import 'bulma/css/bulma.css'
 
 Vue.config.productionTip = false
 
+
 new Vue({
     router,
     store,

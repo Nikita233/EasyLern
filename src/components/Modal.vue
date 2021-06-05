@@ -1,7 +1,7 @@
 <template>
     <transition name="modal-fade">
         <div class="modal-backdrop">
-            <div class="modal" role="dialog">
+            <div class="modal-custom" role="dialog">
 
                 <header class="modal-header" id="modalTitle">
                     <slot name="header">
@@ -13,15 +13,15 @@
                     <slot name="body">
 
                     </slot>
-                    <textarea id="write" v-model="text" placeholder="введите"></textarea>
+                    <textarea id="write" v-model="editableQuest" placeholder="введите"></textarea>
                 </section>
-<p>{{text}}</p>
+<p>{{quest.quest}}</p>
                 <footer class="modal-footer">
                     <slot name="footer">
 
                     </slot>
-                    <button type="button" class="numb" @click="hot">Save</button>
-                    <button type="button" class="btn-green" @click="close">Close</button>
+                    <button type="button" class="numb" @click="handleSave()">Save</button>
+                    <button type="button" class="btn-green" @click="close()">Close</button>
                 </footer>
             </div>
         </div>
@@ -30,61 +30,70 @@
 
 
 <script>
-    import {mapState} from 'vuex'
-    //import main from './main.js'
-    //import index from '@store/index.js'
 
-    export default {
+
+  export default {
         name: 'modal',
         windowNew: false,
 
-        computed: mapState(['count']),
-        // count () {
-        //   return this.$store.state.count
-        // }
+        props: {
+            quest: {}
+        },
 
-        data: () => ({
-            text: ''
-        }),
+      data() {
+        return {
+            editableQuest: this.quest.quest
+        }
+      },
+
         methods: {
             close() {
                 this.$emit('close');
             },
-            inc() {
-                this.$store.commit('increment')
-                //        index.state.count++;
+
+            handleSave() {
+                const isEdit = this.quest.id != null
+                if (isEdit) {
+                    this.$store.commit('updateQuest', {
+                        id: this.quest.id,
+                        quest: this.editableQuest
+                    })
+                } else {
+                    this.$store.commit('addQuest', this.editableQuest)
+                }
+
             },
-            hot() {
-                this.$store.commit('rev', this.text);
-                this.$emit('close');
-                this.text='';
-            }
+
         },
     };
 </script>
 
 <style>
+
     .modal-backdrop {
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(0, 0, 0, 0.3);
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .modal {
-        background: #FFFFFF;
-        box-shadow: 2px 2px 20px 1px;
+    .modal-custom {
+       box-shadow: 2px 2px 20px 1px;
         overflow-x: auto;
+        background: #42c4d2;
+        border-radius: 8px;
+        min-width: 420px;
+        top: 50%;
+        left: 50%;
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
-    .modal-header,
     .modal-footer {
         padding: 15px;
         display: flex;
@@ -123,3 +132,8 @@
         border-radius: 2px;
     }
 </style>
+<!--if (_.includes(this.$store.questions.id)){
+                    this.$store.commit('reWrite', this.text);
+                    this.$emit('close');
+                    this.text = '';
+                }else {-->

@@ -24,13 +24,23 @@
                 </span>
               </p>
             </div>
-
+                <button v-on:click="Test()">add</button>
+                <p></p>
+                <ul>
+                    <li v-for="t in tests" :key="t.id">
+                        <span>{{t.id.toString()}}.</span> {{ t.test }}
+                        <button v-on:click="editTestModalShow(t)">edit</button>
+                    </li>
+                </ul>
+                <div id="editingTest">
+                    {{editingTest.test}}
+                </div>
           </article>
-            <div id="buttons">
-                <button v-on:click="windowNew">Создать тест</button>
-                <modal v-show="isModalVisible" @close="windowClose" />
-            </div>
-         
+
+         <div id="btn-edit">
+             <ModalEditTest v-bind:test="editingTest" v-show="isModalEditTestVisible" @close="windowClose" />
+         </div>
+
         </div>
         
         
@@ -45,31 +55,49 @@
 <script>
 import Menu from '@/components/Menu.vue'
 import Nav_Main from '@/components/Nav_Main.vue'
-import Modal from '@/components/Modal.vue'
+import ModalEditTest from '@/components/ModalEditTest.vue'
+
+import {mapState} from "vuex";
 
 export default {
     name: 'Home',
-  components: {
-      Modal,
+    components: {
+      ModalEditTest,
       Nav_Main,
       Menu
-  },
+    },
     data () {
         return {
             isModalVisible: false,
+            isModalEditTestVisible: false,
+            editingTest: {},
         };
     },
     methods: {
 
         windowNew() {
-            this.isModalVisible = true;
+            this.isModalEditTestVisible = true;
         },
         windowClose() {
             this.isModalVisible = false;
-        }
+            this.isModalEditTestVisible = false;
+        },
+        editTestModalShow(t) {
+            this.isModalEditTestVisible = true;
+            this.editingTest = Object.assign({}, t);
+            console.log(this.editingTest);
+            console.log("helloWorld")
         }
 
-    };
+        },
+
+    computed: {
+        ...mapState(['tests', 'questions'])
+    },
+
+
+
+};
 
 </script>
 

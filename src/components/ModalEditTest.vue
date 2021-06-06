@@ -11,16 +11,15 @@
 
                 <section class="modal-body" id="modalDescription">
                     <slot name="body">
-
+                        <p>{{title}}</p>
                     </slot>
-                    <textarea id="write" v-model="editableQuest" placeholder="введите"></textarea>
+
                 </section>
-<p>{{quest.quest}}</p>
                 <footer class="modal-footer">
                     <slot name="footer">
 
                     </slot>
-                    <button type="button" class="numb" @click="handleSave()">Save</button>
+                    <button type="button" class="numb" @click="add()">add</button>
                     <button type="button" class="btn-green" @click="close()">Close</button>
                 </footer>
             </div>
@@ -28,50 +27,30 @@
     </transition>
 </template>
 
-
 <script>
-
-
-  export default {
-        name: 'modal',
-        windowNew: false,
-
+    export default {
+        name: 'ModalEditTest',
         props: {
-            quest: {}
+            test: {},
         },
-
-      data() {
-        return {
-            editableQuest: this.quest.quest
-        }
-      },
-
+        computed: {
+            title () {
+                return this.test.test
+            },
+        },
         methods: {
             close() {
                 this.$emit('close');
             },
-
-            handleSave() {
-                const isEdit = this.quest.id != null
-                if (isEdit) {
-                    this.$store.commit('updateQuest', {
-                        id: this.quest.id,
-                        quest: this.editableQuest,
-                    })
-                    this.$emit('close');
-                } else {
-                    this.$store.commit('addQuest', this.editableQuest)
-                    this.$emit('close');
-                }
-
-            },
-
-        },
-    };
+            add() {
+                console.log(this.testEntity);
+                this.$emit('close');
+            }
+        }
+    }
 </script>
 
-<style>
-
+<style scoped>
     .modal-backdrop {
         position: fixed;
         top: 0;
@@ -84,7 +63,7 @@
     }
 
     .modal-custom {
-       box-shadow: 2px 2px 20px 1px;
+        box-shadow: 2px 2px 20px 1px;
         overflow-x: auto;
         background: #42c4d2;
         border-radius: 8px;
@@ -134,8 +113,3 @@
         border-radius: 2px;
     }
 </style>
-<!--if (_.includes(this.$store.questions.id)){
-                    this.$store.commit('reWrite', this.text);
-                    this.$emit('close');
-                    this.text = '';
-                }else {-->

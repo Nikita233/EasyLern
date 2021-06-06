@@ -30,7 +30,12 @@
                                 <span>{{q.id.toString()}}.</span> {{ q.quest }}
                                 <button class="btn_blue" v-on:click="windowWrite(q)">Изменить</button>
                                 <button v-on:click="counterPlus(q)">+1</button>
+                                <button v-on:click="counterMinus(q)">-1</button>
                                 <p>Кнопка нажата {{ q.counter }} раз</p>
+                                <div v-for="answer in q.answers" :key=" answer.id">
+                                    <input v-on:change="choiceAnswer(answer, q.id)" :name="q.id" type="radio" :checked="q.correctAnswer == answer.id"/>
+                                    <label>{{answer.text}}{{q.correctAnswer}}-{{answer.id}}</label>
+                                </div>
                             </li>
                         </ul>
                     </article>
@@ -59,28 +64,23 @@
 
     export default {
         name: 'Home',
-        components:
-            {
-                Modal,
-                Nav_Main,
-                Menu
-            },
-        props: {
-
+        components: {
+            Modal,
+            Nav_Main,
+            Menu
         },
         data() {
             return {
                 isModalVisible: false,
-                editingQuestText: [],
+                editingQuestText: {},
                 counterQuest: 0 //this.$store.state.questions.counter
             };
         },
 
         methods: {
-
             windowNew() {
                 this.isModalVisible = true;
-                this.editingQuestText= {};
+                this.editingQuestText = {};
             },
             windowWrite(q) {
                 this.isModalVisible = true;
@@ -92,6 +92,14 @@
             counterPlus(quest){
                // this.counterQuest++
                 this.$store.commit('aPlusCounter', {quest});
+            },
+            counterMinus(quest){
+                this.$store.commit('aMinusCounter', {quest});
+            },
+            choiceAnswer(answer, questionId){
+console.log(answer,questionId);
+                this.$store.commit('choiceCorrectAnswer', {answer, questionId});
+
 
             }
         },

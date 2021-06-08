@@ -10,26 +10,28 @@
               Быстрый поиск
             </p>
             <p class="panel-tabs">
-              <a class="is-active">All</a>
-              <a></a>
+                <button>Добавити предмет</button>
+
+                <a class="is-active">All</a>
+              <a>Math</a>
               <a></a>
               <a></a>
               <a></a>
             </p>
-            <div class="panel-block">
-              <p class="control has-icons-left">
-                <input class="input is-link" type="text" placeholder="Search">
+            <div class="panel-block-1">
+              <p class="control_has-icons-left">
+                <input class="input_is-link" type="text" placeholder="Пошук тесту">
                 <span class="icon is-left">
                   <i class="fas fa-search" aria-hidden="true"></i>
                 </span>
               </p>
             </div>
-                <button v-on:click="Test()">add</button>
+                <button v-on:click="createTestModalShow()">Добавити тест</button>
                 <p></p>
                 <ul>
                     <li v-for="t in tests" :key="t.id">
                         <span>{{t.id.toString()}}.</span> {{ t.test }}
-                        <button v-on:click="editTestModalShow(t)">edit</button>
+                        <button v-on:click="editTestModalShow(t)">Просмотр</button>
                     </li>
                 </ul>
                 <div id="editingTest">
@@ -38,7 +40,8 @@
           </article>
 
          <div id="btn-edit">
-             <ModalEditTest v-bind:test="editingTest" v-show="isModalEditTestVisible" @close="windowClose" />
+             <ModalEditTest v-bind:test="editingTest" v-show="isModalEditTestVisible" @close="windowCloseEditTestModal" />
+             <ModalCreateTest v-bind:test="creatingTest" v-show="isModalCreateTestVisible" @close="windowCloseCreateTestModal" />
          </div>
 
         </div>
@@ -56,21 +59,25 @@
 import Menu from '@/components/Menu.vue'
 import Nav_Main from '@/components/Nav_Main.vue'
 import ModalEditTest from '@/components/ModalEditTest.vue'
+import ModalCreateTest from '@/components/ModalCreateTest.vue'
+
 
 import {mapState} from "vuex";
 
 export default {
     name: 'Home',
     components: {
-      ModalEditTest,
-      Nav_Main,
-      Menu
+        ModalEditTest,
+        ModalCreateTest,
+        Nav_Main,
+        Menu
     },
     data () {
         return {
-            isModalVisible: false,
             isModalEditTestVisible: false,
+            isModalCreateTestVisible: false,
             editingTest: {},
+            creatingTest:{},
         };
     },
     methods: {
@@ -78,16 +85,23 @@ export default {
         windowNew() {
             this.isModalEditTestVisible = true;
         },
-        windowClose() {
-            this.isModalVisible = false;
+        windowCloseEditTestModal() {
             this.isModalEditTestVisible = false;
+        },
+        windowCloseCreateTestModal() {
+            this.isModalCreateTestVisible = false;
         },
         editTestModalShow(t) {
             this.isModalEditTestVisible = true;
             this.editingTest = Object.assign({}, t);
             console.log(this.editingTest);
             console.log("helloWorld")
-        }
+        },
+        createTestModalShow(){
+            this.isModalCreateTestVisible = true;
+          //  this.creatingTest = Object.assign({}, t);
+
+        },
 
         },
 
@@ -104,11 +118,9 @@ export default {
 
 
 <style lang="scss" scoped>
-    panel-block {
-       // z-index: -1;
-    }
+
 article{
-  height: 300px;
+  min-height: 300px;
   width: 700px;
   margin-left: auto;
   margin-right: auto;

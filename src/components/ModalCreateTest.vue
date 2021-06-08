@@ -11,39 +11,28 @@
 
                 <section class="modal-body" id="modalDescription">
                     <slot name="body">
-
                     </slot>
-                    <textarea id="writeQuest" v-model="editableQuest" placeholder="Тест запитання"></textarea>
-                        <select v-model="optionAnswer">
-                            <option>1 варіант</option>
-                            <option>Декілька</option>
-                            <option>У вірній послідовності</option>
-                        </select>
-                        <span>Выбрано: {{optionAnswer}}</span>
-                    <p></p>
-                    <textarea id="writeQuestAnswerFirst" v-model="editableQuestAnswerFirst" placeholder="Тест відповіді"></textarea>
-                    <button type="button" class="numb">-</button>
+                    <textarea id="writeQuest" v-model="editableNameTest" placeholder="Ім'я тесту"></textarea>
+                   <p></p>
                     <select v-model="choiceSubject">
                         <option>Інженерія</option>
                         <option>Програмне забезпечення</option>
                         <option>Мікромеханічні прилади</option>
                     </select>
                     <span>Выбрано: {{choiceSubject}}</span>
-
                     <p></p>
-                    <textarea id="writeQuestAnswerSecond" v-model="editableQuestAnswerSecond" placeholder="Тест відповіді"></textarea>
-                    <button type="button" class="numb">-</button>
-
+                    <button type="button" class="numb" @click="addQuestionTest()">Додати</button>
 
                 </section>
-<p>{{quest.quest}}</p>
                 <footer class="modal-footer">
                     <slot name="footer">
 
                     </slot>
-                    <button type="button" class="numb" @click="handleSave()">Save</button>
+                    <button type="button" class="numb" @click="add()">add</button>
                     <button type="button" class="btn-green" @click="close()">Close</button>
                 </footer>
+                <ModalAddQuestionInTest v-bind:test="addQuestionInTest" v-show="isModalAddQuestionInTestVisible" @close="windowCloseModalAddQuestionInTest" />
+
             </div>
         </div>
     </transition>
@@ -51,53 +40,40 @@
 
 
 <script>
+    import ModalAddQuestionInTest from '@/components/ModalAddQuestionInTest.vue'
 
-
-  export default {
-        name: 'modal',
-        windowNew: false,
-
-        props: {
-            quest: {}
+    export default {
+        name: 'ModalCreateTest',
+        components:{
+            ModalAddQuestionInTest,
         },
-
-      data() {
-        return {
-            editableQuest: this.quest.quest,
-            editableQuestAnswerFirst:{},
-            editableQuestAnswerSecond:{},
-            optionAnswer:'',
-            choiceSubject:'',
-
-        }
-      },
-
+    data(){
+     return {
+         isModalAddQuestionInTestVisible:false,
+         addQuestionInTest: {},
+         editableNameTest:{},
+         choiceSubject:'',
+     }
+    },
         methods: {
+            windowCloseModalAddQuestionInTest(){
+                this.isModalAddQuestionInTestVisible = false;
+
+            },
+            addQuestionTest(){
+                this.isModalAddQuestionInTestVisible= true;
+            },
             close() {
                 this.$emit('close');
             },
-
-            handleSave() {
-                const isEdit = this.quest.id != null
-                if (isEdit) {
-                    this.$store.commit('updateQuest', {
-                        id: this.quest.id,
-                        quest: this.editableQuest,
-                    })
-                    this.$emit('close');
-                } else {
-                    this.$store.commit('addQuest', this.editableQuest)
-                    this.$emit('close');
-                }
-
-            },
-
-        },
-    };
+            add() {
+                this.$emit('close');
+            }
+        }
+    }
 </script>
 
-<style>
-
+<style scoped>
     .modal-backdrop {
         position: fixed;
         top: 0;
@@ -110,7 +86,7 @@
     }
 
     .modal-custom {
-       box-shadow: 2px 2px 20px 1px;
+        box-shadow: 2px 2px 20px 1px;
         overflow-x: auto;
         background: #42c4d2;
         border-radius: 8px;
@@ -160,8 +136,3 @@
         border-radius: 2px;
     }
 </style>
-<!--if (_.includes(this.$store.questions.id)){
-                    this.$store.commit('reWrite', this.text);
-                    this.$emit('close');
-                    this.text = '';
-                }else {-->

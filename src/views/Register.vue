@@ -59,8 +59,6 @@ export default {
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
@@ -94,9 +92,7 @@ hr {
 }
 
 /* Add a blue text color to links */
-a {
-    color: dodgerblue;
-}
+
 
 /* Set a grey background color and center the text of the "sign in" section */
 .signin {

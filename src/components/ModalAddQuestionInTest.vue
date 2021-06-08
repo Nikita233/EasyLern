@@ -11,8 +11,16 @@
 
                 <section class="modal-body" id="modalDescription">
                     <slot name="body">
-                        <p>{{title}}</p>
+
                     </slot>
+                    <div class="panel-block">
+                        <p class="control has-icons-left">
+                            <input class="input is-link" type="text" placeholder="Пошук запитання">
+                            <span class="icon is-left">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+                        </p>
+                    </div>
 
                 </section>
                 <footer class="modal-footer">
@@ -29,14 +37,12 @@
 
 <script>
     export default {
-        name: 'ModalEditTest',
-        props: {
-            test: {},
-        },
-        computed: {
-            title () {
-                return this.test.test
-            },
+        name: 'ModalAddQuestionInTest',
+        data(){
+            return {
+                editableNameTest: {},
+                choiceSubject:'',
+            }
         },
         methods: {
             close() {

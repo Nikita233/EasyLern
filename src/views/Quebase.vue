@@ -9,16 +9,19 @@
                         <p class="panel-heading">
                             Быстрый поиск
                         </p>
-                        <p class="panel-tabs">
-                            <a class="is-active">All</a>
-                            <a></a>
-                            <a></a>
-                            <a></a>
-                            <a></a>
+                        <p class="panel-tabs1">
+
+                            <a class="tab is-active">All</a>
+                            <a class="tab">Math</a>
+                            <a class="tab"></a>
+                            <a class="tab"></a>
+                            <a class="tab"></a>
                         </p>
-                        <div class="panel-block">
-                            <p class="control has-icons-left">
-                                <input class="input is-link" type="text" placeholder="Search">
+                        <div class="panel-block-1">
+                            <p class="control_has-icons-left">
+                                <button class="btn_blue">Добавити предмет</button>
+
+                                <input class="input_is-link" type="text" placeholder="Пошук запитання">
                                 <span class="icon is-left">
                   <i class="fas fa-search" aria-hidden="true"></i>
                 </span>
@@ -26,21 +29,23 @@
 
                         </div>
                         <ul>
-                            <li v-for="q in questions" :key="q.id">
+                            <li class="test_question" v-for="q in questions" :key="q.id">
+                                <div>
                                 <span>{{q.id.toString()}}.</span> {{ q.quest }}
-                                <button class="btn_blue" v-on:click="windowWrite(q)">Изменить</button>
-                                <button v-on:click="counterPlus(q)">+1</button>
-                                <button v-on:click="counterMinus(q)">-1</button>
-                                <p>Кнопка нажата {{ q.counter }} раз</p>
-                                <div v-for="answer in q.answers" :key=" answer.id">
+                                <ul>
+                                <li v-for="answer in q.answers" :key=" answer.id">
                                     <input v-on:change="choiceAnswer(answer, q.id)" :name="q.id" type="radio" :checked="q.correctAnswer == answer.id"/>
                                     <label>{{answer.text}}{{q.correctAnswer}}-{{answer.id}}</label>
+                                </li>
+                                </ul>
                                 </div>
+                                <button class="btn_blue_outline" v-on:click="windowWrite(q)">Змінити</button>
+
                             </li>
                         </ul>
                     </article>
                     <div class="modalWrap"><!--Wrap-обертка-->
-                        <button class="btn btn_blue btn_full btn_medium" v-on:click="windowNew">Создать вопрос</button>
+                        <button class="btn_blue" v-on:click="windowNew">Створити запитання</button>
                         <!--btn-button-->
                         <modal v-bind:quest="editingQuestText" v-show="isModalVisible" @close="windowClose"/>
                     </div>
@@ -109,7 +114,7 @@ console.log(answer,questionId);
 
 <style lang="scss" scoped>
     article {
-        height: 300px;
+        min-height: 300px;
         width: 700px;
         margin-left: auto;
         margin-right: auto;
@@ -135,11 +140,27 @@ console.log(answer,questionId);
         cursor: pointer;
     }
 
+
+    .btn_blue_outline{
+    border: 1px solid #3173dc;
+    border-radius: 6px;
+    line-height: 40px;
+    color: #3173dc;
+    background: transparent;
+    font-weight: bold;
+}
     .btn_blue {
-        color: white;
-        background: #8f9de5;
-        border: 1px solid #0e46ee;
-        border-radius: 2px;
+        white-space: nowrap;
+        line-height: 40px;
+        margin-right: 15px;
+        background-color: #3173dc;
+        color: #fff;
+        border-radius: 6px;
+        border: none;
+        padding: 0 15px;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 6px 6px 6px 6px;
     }
 
     .btn_medium {
@@ -148,7 +169,31 @@ console.log(answer,questionId);
     }
 
     .btn_full {
-        background: #d88d00;
+        background: #3273dc;
     }
-
+    .control_has-icons-left{
+        display: flex;
+        padding: 15px;
+        border-bottom: 1px solid #ededed;
+    }
+    .test_question{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 15px;
+    }
+    .panel-tabs1{
+        display: flex;
+        justify-content: flex-start;
+        border-bottom: 1px solid #ededed;
+        padding: 15px 15px 0;
+    }
+    .tab{
+        font-size: 14px;
+    }
+    .is-active{
+        color: #3273dc;
+        font-weight: bold;
+        border-bottom: 2px solid #3173dc;
+    }
 </style>
